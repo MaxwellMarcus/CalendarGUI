@@ -91,7 +91,7 @@ try:
     credentials = pickle.load(open('token.pkl','rb'))
     service = build('calendar','v3',credentials=credentials)
 except:
-    flow = InstalledAppFlow.from_client_secrets_file('C:/users/Max Marcus/Downloads/client_secret.json',scopes=scopes)
+    flow = InstalledAppFlow.from_client_secrets_file('client_secret.json',scopes=scopes)
     credentials = flow.run_console()
 
     pickle.dump(credentials, open('token.pkl','wb'))
@@ -131,8 +131,8 @@ while True:
 
         time_offset = get_int_from_time(get_time_from_datetime(datetime.now().isoformat()))*multiplier
 
-        y1 = start_val*multiplier+300-time_offset-scroll
-        y2 = end_val*multiplier+300-time_offset-scroll
+        y1 = start_val*multiplier+300-time_offset-scroll+2
+        y2 = end_val*multiplier+300-time_offset-scroll-2
 
         canvas.create_rectangle(50,y1,root.winfo_screenwidth()-50,y2,fill='grey10',outline='red')#'grey35')
         canvas.create_text(root.winfo_screenwidth()/2,y1+15,anchor=CENTER,text=i['summary'],font=('TkTextFont',20),fill='grey50')
