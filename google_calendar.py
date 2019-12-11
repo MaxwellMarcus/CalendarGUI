@@ -101,10 +101,12 @@ except:
 calendar = service.calendarList().list().execute()
 calendar_id = calendar['items'][1]['id']
 
-today_beginning = datetime.utcnow()
+today_beginning =
+now = datetime.utcnow()
 today_end = today_beginning + timedelta(1, 0) - timedelta(0, 1)
 today_beginning = today_beginning.isoformat() + 'Z'
 today_end = today_end.isoformat() + 'Z'
+
 
 timeToGetAgain = get_int_from_time(get_time_from_datetime(datetime.now().isoformat()))-3
 
@@ -134,9 +136,13 @@ while True:
         y1 = start_val*multiplier+300-time_offset-scroll+2
         y2 = end_val*multiplier+300-time_offset-scroll-2
 
-        canvas.create_rectangle(50,y1,root.winfo_screenwidth()-50,y2,fill='grey10',outline='red')#'grey35')
-        canvas.create_text(root.winfo_screenwidth()/2,y1+15,anchor=CENTER,text=i['summary'],font=('TkTextFont',20),fill='grey50')
-        canvas.create_text(root.winfo_screenwidth()/2,y1+40,anchor=CENTER,text=get_hours_and_minutes(start)+'-'+get_hours_and_minutes(end),font=('TkTextFont',10),fill='grey45')
+        canvas.create_rectangle(50,y1,root.winfo_screenwidth()/2-50,y2,fill='grey10',outline='red')#'grey35')
+        if y1 < 300 and y2 > 350:
+            canvas.create_text(root.winfo_screenwidth()/4,315,anchor=CENTER,text=i['summary'],font=('TkTextFont',20),fill='grey50')
+            canvas.create_text(root.winfo_screenwidth()/4,340,anchor=CENTER,text=get_hours_and_minutes(start)+'-'+get_hours_and_minutes(end),font=('TkTextFont',10),fill='grey45')
+        else:
+            canvas.create_text(root.winfo_screenwidth()/4,y1+15,anchor=CENTER,text=i['summary'],font=('TkTextFont',20),fill='grey50')
+            canvas.create_text(root.winfo_screenwidth()/4,y1+40,anchor=CENTER,text=get_hours_and_minutes(start)+'-'+get_hours_and_minutes(end),font=('TkTextFont',10),fill='grey45')
 
     canvas.create_rectangle(0,0,root.winfo_screenwidth(),301,fill='black')
     canvas.create_text(root.winfo_screenwidth()/2,100,anchor=CENTER,text=get_hours_and_minutes(get_time_from_datetime(datetime.now().isoformat())),font=('TkTextFont',50),fill='grey55')
